@@ -1,0 +1,5 @@
+{
+	"name":"JSON",
+	"course":"B.Sc",
+	"address":"Lucknow"
+}

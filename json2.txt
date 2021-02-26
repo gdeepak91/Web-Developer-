@@ -1,0 +1,17 @@
+{
+	"name":"abc",
+	"state":"UP"
+	"employee":[
+				{"fname":"Deepak","lname":"Gupta"}
+				{"fname":"Vinay","lname":"yadav"}
+				{"fname":"Ramesh","lname":"pandey"}
+				{"fname":"Suraj","lname":"tiwary"}
+				{"fname":"Mukesh","lname":"kumar"}
+				{"fname":"Bhopal","lname":"abc"}
+				{"fname":"Gopal","lname":"xyz"}
+				{"fname":"Sunder","lname":"sharma"}
+				{"fname":"Ravindra","lname":"goswami"}
+	 
+}
+
+
