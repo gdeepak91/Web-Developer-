@@ -3,68 +3,46 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="bootstrap.css" type="text/css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-	<title>display.php</title>
+	<title>Document</title>
+	<?= bootstrap(); ?>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<br>
-				<h1 class="text-center">All Information Here !</h1>
-				<br>
-				<table>
-					<tr>
-						<td><a href="index.php"><button class="btn btn-success"><i class="fa fa-plus "> Insert</i></button></a></td>
-						<td><a href="search.php"><button class="btn btn-success"><i class="fa fa-search "> Search</i></button></a></td>
-						<td><a href="login.php"><button class="btn btn-success"><i class="fa fa-sign-in "> Login</i></button></a></td>
+				<h2 class="text-center">Display Information !</h2>
+				<table class="table table-bordered">
+					<tr class="text-center">
+						<td>ID</td>
+						<td>Name</td>
+						<td>E-mail</td>
+						<td>Password</td>
+						<td>Address</td>
+						<td>Image</td>
+						<td colspan="4">Operation</td>
 					</tr>
-				</table>
-				<br>
-				<table class="table table-hover table-bordered text-center">
-					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>E-mail</th>
-						<th>Password</th>
-						<th>DOB</th>
-						<th>Mobile</th>
-						<th>Address</th>
-						<th>Timestamp</th>
-						<!-- <th>Image</th> -->
-						<th>View</th>
-						<th>Edit</th>
-						<th>Delete</th>
+				<?php
+					$result=$this->db->get('curd');
+					// $result=$this->db->row_array($result);
+					$result = $this->db->result_array($result);
+					foreach($result as $value) {
+				?>
+					<tr class="text-center">
+						<td><?= $value['id']; ?></td>
+						<td><?= $value['name']; ?></td> 
+						<td><?= $value['email']; ?></td>
+						<td><?= $value['password']; ?></td>
+						<td><?= $value['address']; ?></td>
+						<td><img src="<?= base_url(); ?>picture/<?= $value['image']; ?>" width="60" height="60" class="rounded-circle"></td>
+						<td><a href="<?= site_url('Deepak/update').'?id='.base64_encode($value['id']); ?>"><button class="btn btn-success">Update</button></a></td>
+						<td><a href="<?= site_url('Deepak/remove').'?id='.base64_encode($value['id']); ?>" ><button class="btn btn-success">Delete</button></a></td>
+						<td><a href="<?= site_url('Deepak/show').'?id='.base64_encode($value['id']); ?>"><button class="btn btn-success">View</button></a></td>
+						 
+						<td><a href="<?= site_url('Deepak/download').'?id='.base64_encode($value['id']); ?>" ><button class="btn btn-success">Download</button></a></td>
 					</tr>
-			<?php
-				include("conn.php");
-
-				$query="select * from register";
-				$result=mysqli_query($conn,$query);
-				while($row=mysqli_fetch_array($result))
-				{
-
-			?>
-				<tr class="text-center">
-					<td><?php echo $row[0]; ?></td>
-					<td><?php echo $row[1]; ?></td>
-					<td><?php echo $row[2]; ?></td>
-					<td><?php echo $row[3]; ?></td>
-					<td><?php echo $row[4]; ?></td>
-					<td><?php echo $row[5]; ?></td>
-					<td><?php echo $row[6]; ?></td>
-					<td><?php echo $row[7]; ?></td>
-					<td><a href="view.php?id=<?php echo $row[0]; ?> && name=<?php echo $row[1]; ?> && email=<?php echo $row[2]; ?> && password=<?php echo $row[3]; ?> && dob=<?php echo $row[4]; ?> && mobile=<?php echo $row[5]; ?> && address=<?php echo $row[6]; ?>  && timestamp=<?php echo $row[7]; ?>"><button class="btn btn-success"><i class="fa fa-eye "> View</i></button></a></td>
-					<td><a href="update.php?id=<?php echo $row[0]; ?> && name=<?php echo $row[1]; ?> && email=<?php echo $row[2]; ?> && password=<?php echo $row[3]; ?> && dob=<?php echo $row[4]; ?> && mobile=<?php echo $row[5]; ?> && address=<?php echo $row[6]; ?> && timestamp=<?php echo $row[7]; ?> "><button class="btn btn-success"><i class="fa fa-edit "> Edit</i></button></a></td>
-					<td><a href="delete.php?id=<?php echo $row[0]; ?>"><button class="btn btn-success"><i class="fa fa-trash " > Delete</i></button></a></td>
-					
-				</tr>
-			<?php
-				}
-			?>
-
+				<?php } ?>
 				</table>
+				<center><a href="" class="text-center"><button class="btn btn-success">Export Excel</button></a></center>
 			</div>
 		</div>
 	</div>
